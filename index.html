@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Publisher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        video {
+            margin-top: 20px;
+            border: 2px solid #000;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Video Publisher</h1>
+    <form id="uploadForm">
+        <label for="videoInput">Upload a video:</label>
+        <input type="file" id="videoInput" accept="video/*">
+        <button type="submit">Publish</button>
+    </form>
+    <video id="videoPlayer" controls style="display: none;"></video>
+
+    <script>
+        const uploadForm = document.getElementById('uploadForm');
+        const videoInput = document.getElementById('videoInput');
+        const videoPlayer = document.getElementById('videoPlayer');
+
+        uploadForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent form submission
+
+            const file = videoInput.files[0];
+            if (file) {
+                const videoURL = URL.createObjectURL(file);
+                videoPlayer.src = videoURL;
+                videoPlayer.style.display = 'block';
+            } else {
+                alert('Please select a video file.');
+            }
+        });
+    </script>
+</body>
+</html>
